@@ -1,25 +1,19 @@
 package com.automation.tests.Day3;
 
 import com.automation.utilities.ConfigurationReader;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.BeforeAll;
-import io.restassured.http.Header;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
-
-import java.sql.Time;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
-import static org.junit.jupiter.api.Assertions.*;
-import static  org.hamcrest.Matcher.*;
+
 
 public class ORDSTestsDay3 {
 
@@ -245,7 +239,15 @@ public class ORDSTestsDay3 {
 
     }
 
-
+    @Test
+    public void test15(){
+        JsonPath path = given().accept(ContentType.JSON).
+                when().get("/employees").
+                thenReturn().jsonPath();
+        List<String> employee_names = path.get("items.first_name");
+        List<String> last_names = path.get("items.last_name");
+        //System.out.println(employee_names);
+    }
 
 
 
